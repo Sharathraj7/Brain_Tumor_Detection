@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brain Tumor Detection</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00ff88;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #111;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #00ff88;
+    }
+    /* Hide original file input */
+    input[type="file"] {
+      display: none;
+    }
+    /* Custom upload button */
+    .custom-file-upload {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #00ff88;
+      color: #000;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+    .custom-file-upload:hover {
+      background: #00cc66;
+    }
+    /* File name text */
+    #fileName {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #00ff88;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #00ff88;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #00cc66;
+    }
+    #result {
+      margin-top: 20px;
+    }
+    #result img {
+      max-width: 100%;
+      border: 2px solid #00ff88;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    #h11{
+        font-size: 60px;
+        margin: 60px;
+    }
+  </style>
+</head>
+<body>
+    <h1 id="h11">Brain Tumor Detection and <br>Classification (YOLOv12)</h1>
+  <div class="container">
+    
+    <form id="uploadForm">
+      <div class="input-field">
+        <label for="fileInput" class="custom-file-upload">
+          Upload MRI Image
+        </label>
+        <input type="file" name="file" id="fileInput" accept="image/*" required>
+        <div id="fileName">No file chosen</div>
+      </div>
+
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById("fileInput");
+    const fileName = document.getElementById("fileName");
+
+    fileInput.addEventListener("change", function() {
+      if (fileInput.files.length > 0) {
+        fileName.textContent = fileInput.files[0].name;
+      } else {
+        fileName.textContent = "No file chosen";
+      }
+    });
+
+    document.getElementById("uploadForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      if (!fileInput.files.length) {
+        alert("Please select an image first!");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
+
+      document.getElementById("result").innerHTML = "<p>Processing...</p>";
+
+      try {
+        const response = await fetch("/predict", {
+          method: "POST",
+          body: formData
+        });
+        const data = await response.json();
+
+        if (data.image_url) {
+          document.getElementById("result").innerHTML = `
+            <p>${data.message}</p>
+            <img src="${data.image_url}" alt="Detected Tumor">
+          `;
+        } else {
+          document.getElementById("result").innerHTML = `<p>Error: ${data.error}</p>`;
+        }
+      } catch (err) {
+        document.getElementById("result").innerHTML = `<p>Request failed: ${err}</p>`;
+      }
+    });
+  </script>
+</body>
+</html>
