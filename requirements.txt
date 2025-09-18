@@ -4,4 +4,5 @@ huggingface_hub
 torch
 numpy
 opencv-python
+gunicorn
 git+https://github.com/sunsmarterjie/yolov12.git
