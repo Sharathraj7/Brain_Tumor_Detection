@@ -38,46 +38,46 @@ User → Render Frontend → Hugging Face API → Deep Learning Model → Predic
 ```
 ## **How to Run Locally**
 
-### Clone this repository
+1. ### Clone this repository
 ```
 git clone https://github.com/Sharathraj7/Brain_Tumor_Detection.git
 cd Brain_Tumor_Detection
 ```
 
-### Install dependencies
+2. ### Install dependencies
 ```
 pip install -r requirements.txt
 ```
 
-### Run the Flask app (if using locally)
+3. ### Run the Flask app (if using locally)
 ```
 python app.py
 ```
 
-### Open your browser at
+4. ### Open your browser at
 ```
 http://127.0.0.1:5000
 ```
-### Demo
+## **Demo**
 Here’s a short demonstration of the Brain Tumor Detection web app in action:
 
 ![Recording 2025-10-26 105552 (1)](https://github.com/user-attachments/assets/e3954ed8-af86-448a-845b-64b11e11221a)
 
 ## **Files and Folders**
 
-**app.py** – Main backend file for API or local testing.
+- **app.py** – Main backend file for API or local testing.
 
-**templates/** – HTML files for the web UI.
+- **templates/** – HTML files for the web UI.
 
-**static/** – CSS, JS, and image assets.
+- **static/** – CSS, JS, and image assets.
 
-**trained_model/** – Pretrained model files (if included).
+- **trained_model/** – Pretrained model files (if included).
 
-**new_Brain_tumor.ipynb** – Jupyter notebook for model training.
+- **new_Brain_tumor.ipynb** – Jupyter notebook for model training.
 
-**requirements.txt** – Python dependencies.
+- **requirements.txt** – Python dependencies.
 
-**Procfile** – Deployment configuration for Render.
+- **Procfile** – Deployment configuration for Render.
 
 ## **Live Project**
 
