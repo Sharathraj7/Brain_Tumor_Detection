@@ -58,6 +58,11 @@ python app.py
 ```
 http://127.0.0.1:5000
 ```
+### Demo
+Here’s a short demonstration of the Brain Tumor Detection web app in action:
+
+![Recording 2025-10-26 105552 (1)](https://github.com/user-attachments/assets/e3954ed8-af86-448a-845b-64b11e11221a)
+
 ## **Files and Folders**
 
 **app.py** – Main backend file for API or local testing.
